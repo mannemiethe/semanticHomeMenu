@@ -688,7 +688,7 @@ slots:
                               config:
                                 cacheSource: true
                                 fetchMetadata: semantics
-                                filter: (loop.rooms.metadata) && ((loop.rooms.metadata.semantics.value).includes("Room")  || (loop.rooms.metadata.semantics.value).includes("Corridor"))
+                                filter: (loop.rooms.metadata) && ((loop.rooms.metadata.semantics.value).includes("Room")  || (loop.rooms.metadata.semantics.value).includes("Corridor")) && ((loop.rooms.metadata.semantics.config.isPartOf).includes(loop.floors.name))
                                 for: rooms
                                 fragment: true
                                 groupItem: =loop.floors.name

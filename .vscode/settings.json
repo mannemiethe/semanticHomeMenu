@@ -1,0 +1,10 @@
+{
+    "editor.formatOnSave": false,
+    "[markdown]": 
+    {
+      "editor.formatOnSave": false
+    },
+    "[yaml]": {
+       "editor.formatOnSave": false
+    },
+}

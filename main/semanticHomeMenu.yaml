@@ -608,7 +608,7 @@ slots:
                         config:
                           cacheSource: true
                           fetchMetadata: semantics,metadata,widgetOrder
-                          filter: ((loop.floorItem.metadata) && (loop.floorItem.metadata.semantics.value).includes("Floor")) && (loop.floorItem.name == vars.objVar.floor)
+                          filter: (((loop.floorItem.metadata) && (loop.floorItem.metadata.semantics.value).includes("Floor")) && (loop.floorItem.name === vars.objVar.floor))
                           for: floorItem
                           itemTags: ","
                           sourceType: itemsWithTags

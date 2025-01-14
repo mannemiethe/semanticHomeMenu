@@ -22,7 +22,7 @@ props:
       name: bnavColor
       required: false
       type: TEXT
-timestamp: Jan 12, 2024, 11:24:05 PM
+timestamp: Jan 14, 2025, 3:57:54 PM
 component: f7-block
 config:
   style:
@@ -267,7 +267,7 @@ slots:
                                     config:
                                       cacheSource: true
                                       fetchMetadata: metadata,semantics,widgetOrder
-                                      filter: (loop.floorArray.metadata) && (loop.floorArray.metadata.semantics.value).includes("Floor")
+                                      filter: (loop.floorArray.metadata) && ((loop.floorArray.metadata.semantics.value).includes("Floor") || (loop.floorArray.metadata.semantics.value).includes("Outdoor_"))
                                       for: floorArray
                                       fragment: true
                                       itemTags: ","
@@ -415,7 +415,7 @@ slots:
                                     config:
                                       cacheSource: true
                                       fetchMetadata: metadata,semantics,widgetOrder
-                                      filter: (loop.roomArray.metadata) && ((loop.roomArray.metadata.semantics.value).includes("Room")  || (loop.roomArray.metadata.semantics.value).includes("Corridor"))
+                                      filter: (loop.roomArray.metadata) && ((loop.roomArray.metadata.semantics.value).includes("Room") || (loop.roomArray.metadata.semantics.value).includes("Corridor"))
                                       for: roomArray
                                       fragment: true
                                       itemTags: ","
@@ -439,6 +439,7 @@ slots:
                                                   class:
                                                     - '=vars.objVar ? "" : "unselected_menu_item"'
                                                     - '=(vars.objVar.room == loop.roomArray.name) ? "selected_menu_item" : "unselected_menu_item"'
+
                                                   text: =loop.roomArray.label
                       - component: f7-col
                         config:
@@ -677,7 +678,7 @@ slots:
                         config:
                           cacheSource: true
                           fetchMetadata: semantics,widgetOrder
-                          filter: (loop.floors.metadata) && (loop.floors.metadata.semantics.value).includes("Floor")
+                          filter: (loop.floors.metadata) && ((loop.floors.metadata.semantics.value).includes("Floor") || (loop.floorArray.metadata.semantics.value).includes("Outdoor_"))
                           for: floors
                           fragment: true
                           itemTags: ","
@@ -709,7 +710,7 @@ slots:
                                           config:
                                             cacheSource: true
                                             fetchMetadata: semantics,metadata,uiSemantics,widgetOrder
-                                            filter: (loop.equipmentItem.metadata.semantics.config) && (loop.equipmentItem.metadata.semantics.config.hasLocation) && (loop.equipmentItem.metadata.semantics.config.hasLocation == loop.roomsSrc.name) && ((vars.objVar.room == loop.equipmentItem.metadata.semantics.config.hasLocation || (vars.objVar.selectSection == "SECTION2" && !vars.objVar.floor && !vars.objVar.room) || (vars.objVar.selectSection == "SECTION2" && vars.objVar.floor == loop.rooms.metadata.semantics.config.isPartOf && !vars.objVar.room) || (vars.objVar.selectSection == "SECTION1")) && (vars.objVar.selectThing == "Lights" || !vars.objVar.selectThing ))
+                                            filter: loop.equipmentItem.tags?.includes("Lightbulb") && (loop.equipmentItem.metadata.semantics.config) && (loop.equipmentItem.metadata.semantics.config.hasLocation) && (loop.equipmentItem.metadata.semantics.config.hasLocation == loop.roomsSrc.name) && ((vars.objVar.room == loop.equipmentItem.metadata.semantics.config.hasLocation || (vars.objVar.selectSection == "SECTION2" && !vars.objVar.floor && !vars.objVar.room) || (vars.objVar.selectSection == "SECTION2" && vars.objVar.floor == loop.rooms.metadata.semantics.config.isPartOf && !vars.objVar.room) || (vars.objVar.selectSection == "SECTION1")) && (vars.objVar.selectThing == "Lights" || !vars.objVar.selectThing ))
                                             for: equipmentItem
                                             fragment: true
                                             itemTags: Lightbulb
@@ -741,7 +742,7 @@ slots:
                                           config:
                                             cacheSource: true
                                             fetchMetadata: semantics,metadata,uiSemantics,widgetOrder
-                                            filter: (loop.equipmentItem.metadata.semantics.config) && (loop.equipmentItem.metadata.semantics.config.hasLocation) && (loop.equipmentItem.metadata.semantics.config.hasLocation == loop.roomsSrc.name) && ((vars.objVar.room == loop.equipmentItem.metadata.semantics.config.hasLocation || (vars.objVar.selectSection == "SECTION2" && !vars.objVar.floor && !vars.objVar.room) || (vars.objVar.selectSection == "SECTION2" && vars.objVar.floor == loop.rooms.metadata.semantics.config.isPartOf && !vars.objVar.room) || (vars.objVar.selectSection == "SECTION1")) && (vars.objVar.selectThing == "Lights" || !vars.objVar.selectThing ))
+                                            filter: loop.equipmentItem.tags?.includes("DimmableLight") && (loop.equipmentItem.metadata.semantics.config) && (loop.equipmentItem.metadata.semantics.config.hasLocation) && (loop.equipmentItem.metadata.semantics.config.hasLocation == loop.roomsSrc.name) && ((vars.objVar.room == loop.equipmentItem.metadata.semantics.config.hasLocation || (vars.objVar.selectSection == "SECTION2" && !vars.objVar.floor && !vars.objVar.room) || (vars.objVar.selectSection == "SECTION2" && vars.objVar.floor == loop.rooms.metadata.semantics.config.isPartOf && !vars.objVar.room) || (vars.objVar.selectSection == "SECTION1")) && (vars.objVar.selectThing == "Lights" || !vars.objVar.selectThing ))
                                             for: equipmentItem
                                             fragment: true
                                             itemTags: DimmableLight
@@ -773,7 +774,7 @@ slots:
                                           config:
                                             cacheSource: true
                                             fetchMetadata: semantics,metadata,uiSemantics,widgetOrder
-                                            filter: (loop.equipmentItem.metadata.semantics.config) && (loop.equipmentItem.metadata.semantics.config.hasLocation) && (loop.equipmentItem.metadata.semantics.config.hasLocation == loop.roomsSrc.name) && ((vars.objVar.room == loop.equipmentItem.metadata.semantics.config.hasLocation || (vars.objVar.selectSection == "SECTION2" && !vars.objVar.floor && !vars.objVar.room) || (vars.objVar.selectSection == "SECTION2" && vars.objVar.floor == loop.rooms.metadata.semantics.config.isPartOf && !vars.objVar.room) || (vars.objVar.selectSection == "SECTION1")) && (vars.objVar.selectThing == "Lights" || !vars.objVar.selectThing ))
+                                            filter: loop.equipmentItem.tags?.includes("ColorLight") && (loop.equipmentItem.metadata.semantics.config) && (loop.equipmentItem.metadata.semantics.config.hasLocation) && (loop.equipmentItem.metadata.semantics.config.hasLocation == loop.roomsSrc.name) && ((vars.objVar.room == loop.equipmentItem.metadata.semantics.config.hasLocation || (vars.objVar.selectSection == "SECTION2" && !vars.objVar.floor && !vars.objVar.room) || (vars.objVar.selectSection == "SECTION2" && vars.objVar.floor == loop.rooms.metadata.semantics.config.isPartOf && !vars.objVar.room) || (vars.objVar.selectSection == "SECTION1")) && (vars.objVar.selectThing == "Lights" || !vars.objVar.selectThing ))
                                             for: equipmentItem
                                             fragment: true
                                             itemTags: ColorLight
@@ -805,7 +806,7 @@ slots:
                                           config:
                                             cacheSource: true
                                             fetchMetadata: semantics,metadata,uiSemantics,widgetOrder
-                                            filter: (loop.equipmentItem.metadata.semantics.config) && (loop.equipmentItem.metadata.semantics.config.hasLocation) && (loop.equipmentItem.metadata.semantics.config.hasLocation == loop.roomsSrc.name) && ((vars.objVar.room == loop.equipmentItem.metadata.semantics.config.hasLocation || (vars.objVar.selectSection == "SECTION2" && !vars.objVar.floor && !vars.objVar.room) || (vars.objVar.selectSection == "SECTION2" && vars.objVar.floor == loop.rooms.metadata.semantics.config.isPartOf && !vars.objVar.room) || (vars.objVar.selectSection == "SECTION1")) && (vars.objVar.selectThing == "Lights" || !vars.objVar.selectThing ))
+                                            filter: (loop.equipmentItem.metadata.semantics.config) && (loop.equipmentItem.metadata.semantics.config.hasLocation) && (loop.equipmentItem.metadata.semantics.config.hasLocation == loop.roomsSrc.name) && ((vars.objVar.room == loop.equipmentItem.metadata.semantics.config.hasLocation || (vars.objVar.selectSection == "SECTION2" && !vars.objVar.floor && !vars.objVar.room) || (vars.objVar.selectSection == "SECTION2" && vars.objVar.floor == loop.rooms.metadata.semantics.config.isPartOf && !vars.objVar.room) || (vars.objVar.selectSection == "SECTION1")) && (vars.objVar.selectThing == "Lights" || !vars.objVar.selectThing )) && loop.equipmentItem.tags?.includes("Lightstripe")
                                             for: equipmentItem
                                             fragment: true
                                             itemTags: Lightstripe
@@ -837,7 +838,7 @@ slots:
                                           config:
                                             cacheSource: true
                                             fetchMetadata: semantics,metadata,uiSemantics,widgetOrder
-                                            filter: (loop.equipmentItem.metadata.semantics.config) && (loop.equipmentItem.metadata.semantics.config.hasLocation) && (loop.equipmentItem.metadata.semantics.config.hasLocation == loop.roomsSrc.name) && ((vars.objVar.room == loop.equipmentItem.metadata.semantics.config.hasLocation || (vars.objVar.selectSection == "SECTION2" && !vars.objVar.floor && !vars.objVar.room) || (vars.objVar.selectSection == "SECTION2" && vars.objVar.floor == loop.rooms.metadata.semantics.config.isPartOf && !vars.objVar.room) || (vars.objVar.selectSection == "SECTION1")) && (vars.objVar.selectThing == "Rollers"))
+                                            filter: (loop.equipmentItem.metadata.semantics.config) && (loop.equipmentItem.metadata.semantics.config.hasLocation) && (loop.equipmentItem.metadata.semantics.config.hasLocation == loop.roomsSrc.name) && ((vars.objVar.room == loop.equipmentItem.metadata.semantics.config.hasLocation || (vars.objVar.selectSection == "SECTION2" && !vars.objVar.floor && !vars.objVar.room) || (vars.objVar.selectSection == "SECTION2" && vars.objVar.floor == loop.rooms.metadata.semantics.config.isPartOf && !vars.objVar.room) || (vars.objVar.selectSection == "SECTION1")) && (vars.objVar.selectThing == "Rollers")) && loop.equipmentItem.tags?.includes("Blinds")
                                             for: equipmentItem
                                             fragment: true
                                             itemTags: Blinds
@@ -868,7 +869,7 @@ slots:
                                           config:
                                             cacheSource: true
                                             fetchMetadata: semantics,metadata,uiSemantics,widgetOrder
-                                            filter: (loop.equipmentItem.metadata.semantics.config) && (loop.equipmentItem.metadata.semantics.config.hasLocation) && (loop.equipmentItem.metadata.semantics.config.hasLocation == loop.roomsSrc.name) && ((vars.objVar.room == loop.equipmentItem.metadata.semantics.config.hasLocation || (vars.objVar.selectSection == "SECTION2" && !vars.objVar.floor && !vars.objVar.room) || (vars.objVar.selectSection == "SECTION2" && vars.objVar.floor == loop.rooms.metadata.semantics.config.isPartOf && !vars.objVar.room) || (vars.objVar.selectSection == "SECTION1")) && (vars.objVar.selectThing == "Climate"))
+                                            filter: (loop.equipmentItem.metadata.semantics.config) && (loop.equipmentItem.metadata.semantics.config.hasLocation) && (loop.equipmentItem.metadata.semantics.config.hasLocation == loop.roomsSrc.name) && ((vars.objVar.room == loop.equipmentItem.metadata.semantics.config.hasLocation || (vars.objVar.selectSection == "SECTION2" && !vars.objVar.floor && !vars.objVar.room) || (vars.objVar.selectSection == "SECTION2" && vars.objVar.floor == loop.rooms.metadata.semantics.config.isPartOf && !vars.objVar.room) || (vars.objVar.selectSection == "SECTION1")) && (vars.objVar.selectThing == "Climate")) && loop.equipmentItem.tags?.includes("RadiatorControl")
                                             for: equipmentItem
                                             fragment: true
                                             itemTags: RadiatorControl
@@ -900,7 +901,7 @@ slots:
                                           config:
                                             cacheSource: true
                                             fetchMetadata: semantics,uiSemantics,widgetOrder
-                                            filter: (loop.equipmentItem.metadata.semantics.config) && (loop.equipmentItem.metadata.semantics.config.hasLocation) && (loop.equipmentItem.metadata.semantics.config.hasLocation == loop.roomsSrc.name) && ((vars.objVar.room == loop.equipmentItem.metadata.semantics.config.hasLocation || (vars.objVar.selectSection == "SECTION2" && !vars.objVar.floor && !vars.objVar.room) || (vars.objVar.selectSection == "SECTION2" && vars.objVar.floor == loop.rooms.metadata.semantics.config.isPartOf && !vars.objVar.room) || (vars.objVar.selectSection == "SECTION1")) && (vars.objVar.selectThing == "Climate"))
+                                            filter: (loop.equipmentItem.metadata.semantics.config) && (loop.equipmentItem.metadata.semantics.config.hasLocation) && (loop.equipmentItem.metadata.semantics.config.hasLocation == loop.roomsSrc.name) && ((vars.objVar.room == loop.equipmentItem.metadata.semantics.config.hasLocation || (vars.objVar.selectSection == "SECTION2" && !vars.objVar.floor && !vars.objVar.room) || (vars.objVar.selectSection == "SECTION2" && vars.objVar.floor == loop.rooms.metadata.semantics.config.isPartOf && !vars.objVar.room) || (vars.objVar.selectSection == "SECTION1")) && (vars.objVar.selectThing == "Climate")) && loop.equipmentItem.tags?.includes("HVAC")
                                             for: equipmentItem
                                             fragment: true
                                             itemTags: HVAC

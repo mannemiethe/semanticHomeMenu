@@ -7,4 +7,5 @@
     "[yaml]": {
        "editor.formatOnSave": false
     },
+    "openhab.useRestApi": false,
 }

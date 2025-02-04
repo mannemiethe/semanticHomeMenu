@@ -1,7 +1,9 @@
 uid: semanticHomeMenu
+version: 1.0
 tags:
   - v1.1
   - improvements Nico_R and hmerk
+  - manuelmiethe (performance_improvement)
 props:
   parameters:
     - default: orange

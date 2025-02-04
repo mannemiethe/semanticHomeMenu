@@ -1,0 +1,126 @@
+uid: semanticHomeMenu_Appliances
+tags: []
+props:
+  parameters:
+  - context: item
+    description: Calculated by oh-repeater
+    label: Appliance Equipment Group
+    name: groupItem
+    required: false
+    type: TEXT
+  - context: Text
+    description: Calculated by oh-repeater
+    label: Appliance Equipment Group Label
+    name: groupItemLabel
+    required: false
+    type: TEXT
+  - context: Text
+    description: Calculated by oh-repeater
+    label: Appliance Equipment Group Location
+    name: groupItemLocation
+    required: false
+    type: TEXT
+  - context: Text
+    description: Calculated by oh-repeater
+    label: Appliance Equipment Type
+    name: equipmentType
+    required: false
+    type: TEXT
+timestamp: Feb 4, 2025, 11:52:30 PM
+component: f7-card
+config:
+  style:
+    border-radius: 10px
+    margin-left: 5px
+    margin-right: 5px
+    min-width: 360px
+  stylesheet: |
+    
+    .accordion-nr.open {
+
+      max-height: 400px;
+      transition: max-height 0.25s ease-in; 
+    }
+    .accordion-nr.closed {
+
+      max-height: 0px;
+      transition: max-height 0.15s ease-out;
+    }
+slots:
+  default:
+  - component: f7-row
+    config:
+      class:
+      - justify-content-left
+      - align-items-center
+      - display-flex
+    slots:
+      default:
+      - component: f7-col
+        config:
+          class:
+          - padding-half
+          style:
+            height: 100%
+            width: 60px
+        slots:
+          default:
+          - component: oh-icon
+            config:
+              height: 100%
+              icon: iconify:clarity:power-line
+              style:
+                opacity: 0.7
+              width: 100%
+      - component: f7-col
+        config:
+          class:
+          - display-flex
+          - flex-direction-column
+          style:
+            flex-grow: 1
+            height: 100%
+        slots:
+          default:
+          - component: f7-row
+            config:
+              style:
+                overflow: hidden
+                width: 100%
+            slots:
+              default:
+              - component: Label
+                config:
+                  style:
+                    font-size: 16px
+                    font-weight: bold
+                  text: '=props.groupItemLabel ? props.groupItemLabel : "TBD"'
+          - component: f7-row
+            config:
+              class:
+              - display-flex
+              - flex-direction-column
+              style:
+                width: 100%
+            slots:
+              default:
+              - component: Label
+                config:
+                  text: '=props.groupItemLocation ? props.groupItemLocation : "TBD"'
+      - component: f7-col
+        config:
+          class:
+          - display-flex
+          - justify-content-center
+          - margin-right
+          style:
+            height: 100%
+            padding-right: '=props.equipmentType != "Switch" ? "0" : "30px"'
+            width: auto
+        slots:
+          default:
+          - component: oh-toggle
+            config:
+              item: =props.groupItem + "_switch"
+              style:
+                --f7-toggle-active-color: =props.colorScheme

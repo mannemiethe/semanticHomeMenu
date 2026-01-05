@@ -192,7 +192,7 @@ slots:
                     visible: "=props.equipmentType === 'ColorLight' ? 'true' : 'false'"
                 - component: oh-slider
                   config:
-                    item: "=props.equipmentType != 'ColorLight' ? '' : props.groupItem + '_colorTemperature'"
+                    item: "=props.equipmentType != 'ColorLight' ? '' : props.groupItem + '_temperature'"
                     max: 100
                     min: 0
                     style:

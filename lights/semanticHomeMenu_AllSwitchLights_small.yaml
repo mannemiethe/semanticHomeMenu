@@ -1,0 +1,151 @@
+uid: semanticHomeMenu_AllSwitchLights_small
+tags: 
+  - manuelmiethe
+props:
+  parameters:
+  - description: A text prop
+    label: Prop 1
+    name: prop1
+    required: false
+    type: TEXT
+  - context: item
+    description: An item to control
+    label: Item
+    name: item
+    required: false
+    type: TEXT
+  parameterGroups: []
+timestamp: Feb 10, 2025, 1:07:07 PM
+component: f7-block
+config:
+  title: All Lights
+  config: {}
+  style: "background: transparent; box-shadow: none; margin-right: 0px; margin-left: 0px;  padding-right: 0px; padding-left: 0px"
+slots:
+  default:
+  - component: f7-block
+    config:
+      style:
+        padding-left: 0px
+        padding-right: 0px
+    slots:
+      default:
+      - component: f7-row
+        config:
+          style:
+            justify-content: flex-start
+            --f7-grid-gap: 0px
+        slots:
+          default:
+          - component: oh-repeater
+            config:
+              filter: loop.equipmentItem.tags?.includes("SwitchLight") && (loop.equipmentItem.metadata.semantics.config) && (loop.equipmentItem.metadata.semantics.config.hasLocation) && (loop.equipmentItem.metadata.semantics.config.hasLocation == loop.roomsSrc.name) && ((vars.objVar.room == loop.equipmentItem.metadata.semantics.config.hasLocation || (vars.objVar.selectSection == "SECTION2" && !vars.objVar.floor && !vars.objVar.room) || (vars.objVar.selectSection == "SECTION2" && vars.objVar.floor == loop.rooms.metadata.semantics.config.isPartOf && !vars.objVar.room) || (vars.objVar.selectSection == "SECTION1")) && (vars.objVar.selectThing == "Lights" || !vars.objVar.selectThing ))
+              fragment: true
+              itemTags: SwitchLight
+              sourceType: itemsWithTags
+              for: equipmentItem
+              cacheSource: true
+              fetchMetadata: semantics,metadata,uiSemantics,widgetOrder
+            slots:
+              default:
+              - component: f7-col
+                config:
+                  width: "50"
+                  medium: "33"
+                  large: "20"
+                  xlarge: "20"
+                  class:
+                  - '=((vars.objVar.room == loop.equipmentItem.metadata.semantics.config.hasLocation || (vars.objVar.selectSection == "SECTION2" && !vars.objVar.floor && !vars.objVar.room) || (vars.objVar.selectSection == "SECTION2" && vars.objVar.floor == loop.rooms.metadata.semantics.config.isPartOf && !vars.objVar.room) || (vars.objVar.selectSection == "SECTION1")) && (vars.objVar.selectThing == "Lights" || !vars.objVar.selectThing )) ? "visible" : "invisible"'
+                slots:
+                  default:
+                  - component: widget:semanticHomeMenu_Lights_small
+                    config:
+                      groupItemLabel: "=loop.equipmentItem.metadata.uiSemantics ? loop.equipmentItem.metadata.uiSemantics.config.equipment : loop.equipmentItem.label"
+                      groupItem: =loop.equipmentItem.name
+                      colorScheme: var(--my-text-colorScheme)
+                      equipmentType: Lightbulb
+                      groupItemLocation: "=loop.equipmentItem.metadata.uiSemantics ? loop.equipmentItem.metadata.uiSemantics.config.location : loop.roomsSrc.label"
+          - component: oh-repeater
+            config:
+              filter: loop.equipmentItem.tags?.includes("DimmableLight") && (loop.equipmentItem.metadata.semantics.config) && (loop.equipmentItem.metadata.semantics.config.hasLocation) && (loop.equipmentItem.metadata.semantics.config.hasLocation == loop.roomsSrc.name) && ((vars.objVar.room == loop.equipmentItem.metadata.semantics.config.hasLocation || (vars.objVar.selectSection == "SECTION2" && !vars.objVar.floor && !vars.objVar.room) || (vars.objVar.selectSection == "SECTION2" && vars.objVar.floor == loop.rooms.metadata.semantics.config.isPartOf && !vars.objVar.room) || (vars.objVar.selectSection == "SECTION1")) && (vars.objVar.selectThing == "Lights" || !vars.objVar.selectThing ))
+              fragment: true
+              itemTags: DimmableLight
+              sourceType: itemsWithTags
+              for: equipmentItem
+              cacheSource: true
+              fetchMetadata: semantics,metadata,uiSemantics,widgetOrder
+            slots:
+              default:
+              - component: f7-col
+                config:
+                  width: "50"
+                  medium: "33"
+                  large: "20"
+                  xlarge: "20"
+                  class:
+                  - '=((vars.objVar.room == loop.equipmentItem.metadata.semantics.config.hasLocation || (vars.objVar.selectSection == "SECTION2" && !vars.objVar.floor && !vars.objVar.room) || (vars.objVar.selectSection == "SECTION2" && vars.objVar.floor == loop.rooms.metadata.semantics.config.isPartOf && !vars.objVar.room) || (vars.objVar.selectSection == "SECTION1")) && (vars.objVar.selectThing == "Lights" || !vars.objVar.selectThing )) ? "visible" : "invisible"'
+                slots:
+                  default:
+                  - component: widget:semanticHomeMenu_Lights_small
+                    config:
+                      groupItemLabel: "=loop.equipmentItem.metadata.uiSemantics ? loop.equipmentItem.metadata.uiSemantics.config.equipment : loop.equipmentItem.label"
+                      groupItem: =loop.equipmentItem.name
+                      colorScheme: var(--my-text-colorScheme)
+                      equipmentType: DimmableLight
+                      groupItemLocation: "=loop.equipmentItem.metadata.uiSemantics ? loop.equipmentItem.metadata.uiSemantics.config.location : loop.roomsSrc.label"
+          - component: oh-repeater
+            config:
+              filter: loop.equipmentItem.tags?.includes("ColorLight") && (loop.equipmentItem.metadata.semantics.config) && (loop.equipmentItem.metadata.semantics.config.hasLocation) && (loop.equipmentItem.metadata.semantics.config.hasLocation == loop.roomsSrc.name) && ((vars.objVar.room == loop.equipmentItem.metadata.semantics.config.hasLocation || (vars.objVar.selectSection == "SECTION2" && !vars.objVar.floor && !vars.objVar.room) || (vars.objVar.selectSection == "SECTION2" && vars.objVar.floor == loop.rooms.metadata.semantics.config.isPartOf && !vars.objVar.room) || (vars.objVar.selectSection == "SECTION1")) && (vars.objVar.selectThing == "Lights" || !vars.objVar.selectThing ))
+              fragment: true
+              itemTags: ColorLight
+              sourceType: itemsWithTags
+              for: equipmentItem
+              cacheSource: true
+              fetchMetadata: semantics,metadata,uiSemantics,widgetOrder
+            slots:
+              default:
+              - component: f7-col
+                config:
+                  width: "50"
+                  medium: "33"
+                  large: "20"
+                  xlarge: "20"
+                  class:
+                  - '=((vars.objVar.room == loop.equipmentItem.metadata.semantics.config.hasLocation || (vars.objVar.selectSection == "SECTION2" && !vars.objVar.floor && !vars.objVar.room) || (vars.objVar.selectSection == "SECTION2" && vars.objVar.floor == loop.rooms.metadata.semantics.config.isPartOf && !vars.objVar.room) || (vars.objVar.selectSection == "SECTION1")) && (vars.objVar.selectThing == "Lights" || !vars.objVar.selectThing )) ? "visible" : "invisible"'
+                slots:
+                  default:
+                  - component: widget:semanticHomeMenu_Lights_small
+                    config:
+                      groupItemLabel: "=loop.equipmentItem.metadata.uiSemantics ? loop.equipmentItem.metadata.uiSemantics.config.equipment : loop.equipmentItem.label"
+                      groupItem: =loop.equipmentItem.name
+                      colorScheme: var(--my-text-colorScheme)
+                      equipmentType: ColorLight
+                      groupItemLocation: "=loop.equipmentItem.metadata.uiSemantics ? loop.equipmentItem.metadata.uiSemantics.config.location : loop.roomsSrc.label"
+          - component: oh-repeater
+            config:
+              filter: (loop.equipmentItem.metadata.semantics.config) && (loop.equipmentItem.metadata.semantics.config.hasLocation) && (loop.equipmentItem.metadata.semantics.config.hasLocation == loop.roomsSrc.name) && ((vars.objVar.room == loop.equipmentItem.metadata.semantics.config.hasLocation || (vars.objVar.selectSection == "SECTION2" && !vars.objVar.floor && !vars.objVar.room) || (vars.objVar.selectSection == "SECTION2" && vars.objVar.floor == loop.rooms.metadata.semantics.config.isPartOf && !vars.objVar.room) || (vars.objVar.selectSection == "SECTION1")) && (vars.objVar.selectThing == "Lights" || !vars.objVar.selectThing )) && loop.equipmentItem.tags?.includes("Lightstripe")
+              fragment: true
+              itemTags: Lightstripe
+              sourceType: itemsWithTags
+              for: equipmentItem
+              cacheSource: true
+              fetchMetadata: semantics,metadata,uiSemantics,widgetOrder
+            slots:
+              default:
+              - component: f7-col
+                config:
+                  width: "50"
+                  medium: "33"
+                  large: "20"
+                  xlarge: "20"
+                  class:
+                  - '=((vars.objVar.room == loop.equipmentItem.metadata.semantics.config.hasLocation || (vars.objVar.selectSection == "SECTION2" && !vars.objVar.floor && !vars.objVar.room) || (vars.objVar.selectSection == "SECTION2" && vars.objVar.floor == loop.rooms.metadata.semantics.config.isPartOf && !vars.objVar.room) || (vars.objVar.selectSection == "SECTION1")) && (vars.objVar.selectThing == "Lights" || !vars.objVar.selectThing )) ? "visible" : "invisible"'
+                slots:
+                  default:
+                  - component: widget:semanticHomeMenu_Lights_small
+                    config:
+                      groupItemLabel: "=loop.equipmentItem.metadata.uiSemantics ? loop.equipmentItem.metadata.uiSemantics.config.equipment : loop.equipmentItem.label"
+                      groupItem: =loop.equipmentItem.name
+                      colorScheme: var(--my-text-colorScheme)
+                      equipmentType: ColorLight
+                      groupItemLocation: "=loop.equipmentItem.metadata.uiSemantics ? loop.equipmentItem.metadata.uiSemantics.config.location : loop.roomsSrc.label"

@@ -1,0 +1,33 @@
+uid: json_popup_widget
+tags: []
+props:
+  parameters:
+  - default: '{"lights": [{"name": "Living Room", "state": "ON"}, {"name": "Kitchen", "state": "OFF"}]}'
+    name: jsonDataForTesting
+    required: false
+    type: TEXT
+  - context: item
+    default: jsonItemTest
+    description: Item containing JSON data
+    label: JSON Item
+    name: itemTest
+    required: true
+    type: TEXT
+timestamp: Feb 11, 2025, 11:25:23 AM
+component: f7-card
+config:
+  class: popup-example
+  swipeToClose: true
+  closeByBackdropClick: true
+slots:
+  default:
+  - component: oh-repeater
+    config:
+      for: light
+      sourceType: array
+      in: =JSON.parse(items[props.itemTest].state).lights
+    slots:
+      default:
+      - component: Label
+        config:
+          text: =loop.light.name

@@ -1,0 +1,367 @@
+uid: semanticHomeMenu_LightsPopup
+tags: []
+props:
+  parameters:
+  - context: item
+    description: Calculated by oh-repeater
+    label: Light Equipment Group
+    name: groupItem
+    required: false
+    type: TEXT
+  - context: Text
+    description: Calculated by oh-repeater
+    label: Light Equipment Group Label
+    name: groupItemLabel
+    required: false
+    type: TEXT
+  - context: Text
+    description: Calculated by oh-repeater
+    label: Light Equipment Group Location
+    name: groupItemLocation
+    required: false
+    type: TEXT
+  - context: Text
+    description: Calculated by oh-repeater
+    label: Light Equipment Type
+    name: equipmentType
+    required: false
+    type: TEXT
+  - context: Text
+    default: orange
+    label: ColorScheme
+    name: colorScheme
+    required: true
+    type: TEXT
+timestamp: Feb 9, 2025, 5:23:58 PM
+component: f7-card
+config:
+  stylesheet: |
+    
+    .accordion-nr.open {
+
+      max-height: 400px;
+      transition: max-height 0.25s ease-in; 
+    }
+    .accordion-nr.closed {
+
+      max-height: 0px;
+      transition: max-height 0.15s ease-out;
+    }
+  style:
+    border-radius: 10px
+    margin-left: 5px
+    margin-right: 5px
+    min-width: 360px
+slots:
+  default:
+  - component: f7-row
+    config:
+      class:
+      - justify-content-left
+      - align-items-center
+      - display-flex
+    slots:
+      default:
+      - component: f7-col
+        config:
+          class:
+          - padding-half
+          style:
+            width: 60px
+            height: 100%
+        slots:
+          default:
+          - component: oh-icon
+            config:
+              icon: iconify:clarity:lightbulb-line
+              width: 100%
+              style:
+                opacity: 0.7
+              height: 100%
+      - component: f7-col
+        config:
+          class:
+          - display-flex
+          - flex-direction-column
+          style:
+            flex-grow: 1
+            height: 100%
+        slots:
+          default:
+          - component: f7-row
+            config:
+              style:
+                width: 100%
+                overflow: hidden
+            slots:
+              default:
+              - component: Label
+                config:
+                  style:
+                    font-size: 16px
+                    font-weight: bold
+                  text: '=props.groupItemLabel ? props.groupItemLabel : "TBD"'
+          - component: f7-row
+            config:
+              class:
+              - display-flex
+              - flex-direction-column
+              style:
+                width: 100%
+            slots:
+              default:
+              - component: Label
+                config:
+                  text: '=props.groupItemLocation ? props.groupItemLocation : "TBD"'
+      - component: f7-col
+        config:
+          class:
+          - display-flex
+          - justify-content-center
+          - margin-right
+          style:
+            width: auto
+            height: 100%
+            padding-right: '=props.equipmentType != "Lightbulb" ? "0" : "30px"'
+        slots:
+          default:
+          - component: oh-toggle
+            config:
+              item: '=props.equipmentType != "Lightbulb" ? props.groupItem + "_brightness" : props.groupItem + "_switch"'
+              style:
+                --f7-toggle-active-color: =props.colorScheme
+      - component: f7-col
+        config:
+          class:
+          - display-flex
+          - justify-content-center
+          - margin-right
+          style:
+            width: auto
+            height: 100%
+        slots:
+          default:
+          - component: oh-link
+            config:
+              action: popup
+              popupOpen: ="."+props.groupItem
+            slots:
+              default:
+              - component: oh-icon
+                config:
+                  icon: f7:ellipsis_vertical
+                  width: 30px
+                  style:
+                    color: var(--f7-toggle-inactive-color)
+  - component: f7-block
+    config:
+      class:
+      - no-padding
+      - accordion-nr
+      - 'open'
+      style:
+        width: 100%
+        margin-top: 0px
+        overflow: hidden
+    slots:
+      default:
+      - component: f7-row
+        config:
+          class:
+          - margin
+          - justify-content-left
+          - align-items-center
+          - display-flex
+          style:
+            height: auto
+        slots:
+          default:
+          - component: Label
+            config:
+              style:
+                margin-left: 1rem
+                font-size: 13px
+                line-height: 0.5
+                font-weight: var(--f7-list-item-footer-font-weight)
+                display: "=props.equipmentType === 'ColorLight' ? '' : 'none !important'"
+              text: Ambiance
+              visible: "=props.equipmentType === 'ColorLight' ? 'true' : 'false'"
+          - component: oh-slider
+            config:
+              item: "=props.equipmentType != 'ColorLight' ? '' : props.groupItem + '_colorTemperature'"
+              style:
+                margin-left: 10px
+                width: calc(100% - 1rem)
+                margin-top: 15px
+                --f7-range-bar-size: var(--f7-color-picker-slider-size)
+                margin-right: 10px
+              min: 0
+              visible: "=props.equipmentType === 'ColorLight' ? 'true' : 'false'"
+              max: 100
+      - component: f7-row
+        config:
+          class:
+          - margin
+          - justify-content-left
+          - align-items-center
+          - display-flex
+          style:
+            height: auto
+        slots:
+          default:
+          - component: Label
+            config:
+              style:
+                margin-left: 1rem
+                font-size: 13px
+                line-height: 0.5
+                font-weight: var(--f7-list-item-footer-font-weight)
+                display: "=props.equipmentType != 'Lightbulb' ? '' : 'none !important'"
+              text: Brightness
+              visible: "=props.equipmentType != 'Lightbulb' ? 'true' : 'false'"
+          - component: oh-slider
+            config:
+              item: "=props.equipmentType != 'Lightbulb' ? props.groupItem + '_brightness' : ''"
+              style:
+                margin-left: 10px
+                width: calc(100% - 1rem)
+                margin-top: 15px
+                --f7-range-bar-size: var(--f7-color-picker-slider-size)
+                margin-right: 10px
+              min: 0
+              visible: "=props.equipmentType != 'Lightbulb' ? 'true' : 'false'"
+              max: 100
+      - component: f7-row
+        config:
+          class:
+          - margin
+          - justify-content-left
+          - align-items-center
+          - display-flex
+          style:
+            height: auto
+        slots:
+          default:
+          - component: Label
+            config:
+              style:
+                margin-left: 1rem
+                font-size: 13px
+                line-height: 0.5
+                font-weight: var(--f7-list-item-footer-font-weight)
+                display: "=props.equipmentType === 'ColorLight' ? '' : 'none !important'"
+              text: RGB colors
+              visible: "=props.equipmentType === 'ColorLight' ? 'true' : 'false'"
+          - component: oh-colorpicker
+            config:
+              item: "=props.equipmentType != 'ColorLight' ? '' : props.groupItem + '_color'"
+              style:
+                width: calc(100% - 1rem)
+              visible: "=props.equipmentType === 'ColorLight' ? 'true' : 'false'"
+              modules:
+              - rgb-sliders
+
+  - component: f7-popup
+    config:
+      closeOnEscape: true
+      swipeToClose: true
+      closeByBackdropClick: true
+      class: =props.groupItem
+      closeByOutsideClick: true
+    slots:
+      default:
+      - component: f7-row
+        config:
+          class:
+          - margin
+          - justify-content-left
+          - align-items-center
+          - display-flex
+          style:
+            height: auto
+        slots:
+          default:
+          - component: Label
+            config:
+              style:
+                margin-left: 1rem
+                font-size: 13px
+                line-height: 0.5
+                font-weight: var(--f7-list-item-footer-font-weight)
+                display: "=props.equipmentType === 'ColorLight' ? '' : 'none !important'"
+              text: Ambiance
+              visible: "=props.equipmentType === 'ColorLight' ? 'true' : 'false'"
+          - component: oh-slider
+            config:
+              item: "=props.equipmentType != 'ColorLight' ? '' : props.groupItem + '_colorTemperature'"
+              style:
+                margin-left: 10px
+                width: calc(100% - 1rem)
+                margin-top: 15px
+                --f7-range-bar-size: var(--f7-color-picker-slider-size)
+                margin-right: 10px
+              min: 0
+              visible: "=props.equipmentType === 'ColorLight' ? 'true' : 'false'"
+              max: 100
+      - component: f7-row
+        config:
+          class:
+          - margin
+          - justify-content-left
+          - align-items-center
+          - display-flex
+          style:
+            height: auto
+        slots:
+          default:
+          - component: Label
+            config:
+              style:
+                margin-left: 1rem
+                font-size: 13px
+                line-height: 0.5
+                font-weight: var(--f7-list-item-footer-font-weight)
+                display: "=props.equipmentType != 'Lightbulb' ? '' : 'none !important'"
+              text: Brightness
+              visible: "=props.equipmentType != 'Lightbulb' ? 'true' : 'false'"
+          - component: oh-slider
+            config:
+              item: "=props.equipmentType != 'Lightbulb' ? props.groupItem + '_brightness' : ''"
+              style:
+                margin-left: 10px
+                width: calc(100% - 1rem)
+                margin-top: 15px
+                --f7-range-bar-size: var(--f7-color-picker-slider-size)
+                margin-right: 10px
+              min: 0
+              visible: "=props.equipmentType != 'Lightbulb' ? 'true' : 'false'"
+              max: 100
+      - component: f7-row
+        config:
+          class:
+          - margin
+          - justify-content-left
+          - align-items-center
+          - display-flex
+          style:
+            height: auto
+        slots:
+          default:
+          - component: Label
+            config:
+              style:
+                margin-left: 1rem
+                font-size: 13px
+                line-height: 0.5
+                font-weight: var(--f7-list-item-footer-font-weight)
+                display: "=props.equipmentType === 'ColorLight' ? '' : 'none !important'"
+              text: RGB colors
+              visible: "=props.equipmentType === 'ColorLight' ? 'true' : 'false'"
+          - component: oh-colorpicker
+            config:
+              item: "=props.equipmentType != 'ColorLight' ? '' : props.groupItem + '_color'"
+              style:
+                width: calc(100% - 1rem)
+              visible: "=props.equipmentType === 'ColorLight' ? 'true' : 'false'"
+              modules:
+              - rgb-sliders

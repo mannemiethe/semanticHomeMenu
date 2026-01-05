@@ -125,7 +125,14 @@ config:
         justify-content: left;
         }
 slots:
-  default:
+ default:
+ - component: oh-context
+   config:
+    variables:
+      objVar:
+        selectSection: SECTION0
+   slots:
+    default:
     - component: f7-block
       config:
         class:

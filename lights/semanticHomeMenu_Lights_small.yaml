@@ -1,0 +1,122 @@
+uid: semanticHomeMenu_Lights_small
+tags:
+  - Mike P
+  - bangertech
+  - manuelmiethe
+props:
+  parameters:
+  - context: item
+    description: Calculated by oh-repeater
+    label: Light Equipment Group
+    name: groupItem
+    required: false
+    type: TEXT
+  - context: Text
+    description: Calculated by oh-repeater
+    label: Light Equipment Group Label
+    name: groupItemLabel
+    required: false
+    type: TEXT
+  - context: Text
+    description: Calculated by oh-repeater
+    label: Light Equipment Group Location
+    name: groupItemLocation
+    required: false
+    type: TEXT
+  - context: Text
+    description: Calculated by oh-repeater
+    label: Light Equipment Type
+    name: equipmentType
+    required: false
+    type: TEXT
+  - context: Text
+    default: orange
+    label: ColorScheme
+    name: colorScheme
+    required: true
+    type: TEXT
+  parameterGroups: []
+timestamp: Feb 10, 2025, 1:46:08 AM
+component: f7-card
+config:
+  style:
+    background-color: "=props.bgcolor ? props.bgcolor : ''"
+    border-radius: var(--f7-card-expandable-border-radius)
+    margin-left: 5px
+    box-shadow: 5px 5px 10px 1px rgba(0,0,0,0.1)
+    padding: 0px
+    minWidth: 140px
+    height: 120px
+    margin-right: 5px
+    noShadow: false
+slots:
+  content:
+  - component: f7-block
+    config:
+      style:
+        flex-direction: row
+        position: absolute
+        top: -5px
+        left: 16px
+        display: flex
+        width: calc(100% - 50px)
+    slots:
+      default:
+      - component: f7-icon
+        config:
+          f7: =props.icon || 'text_justify'
+          style:
+            margin-right: 10px
+          size: 18
+      - component: Label
+        config:
+          style:
+            overflow: hidden
+            text-overflow: ellipsis
+            white-space: nowrap
+            font-size: 12px
+            margin-top: 0px
+          text: '=props.groupItemLocation ? props.groupItemLocation : "Office TBD"'
+  - component: f7-block
+    config:
+      style:
+        width: calc(100% - 0px)
+        position: absolute
+        flex-direction: row
+        left: 3px
+        top: 55px
+        bottom: -15px
+    slots:
+      default:
+      - component: Label
+        config:
+          style:
+            margin-left: 15px
+            font-size: 17px
+            overflow: hidden
+            text-overflow: ellipsis
+            white-space: wrap
+            font-weight: 600
+          text: '=props.groupItemLabel ? props.groupItemLabel : "Light1 TBD"'
+  - component: oh-slider
+    config:
+      item: "=props.equipmentType != 'Lightbulb' ? props.groupItem + '_brightness' : ''"
+      style:
+        left: 20px
+        bottom: -75px
+        --f7-range-knob-size: 20px
+        width: calc(100% - 40px)
+        position: absolute
+        --f7-range-bar-size: 8px
+        --f7-range-bar-border-radius: 8px
+        --f7-range-knob-box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3)
+      visible: "=props.equipmentType != 'Lightbulb' ? 'true' : 'false'"
+      min: 0
+      max: 100
+  - component: oh-toggle
+    config:
+      item: '=props.equipmentType != "Lightbulb" ? props.groupItem + "_brightness" :  props.groupItem + "_switch"'
+      style:
+        top: 15px
+        position: absolute
+        right: 20px

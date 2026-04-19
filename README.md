@@ -111,3 +111,63 @@ and anyone else I have forgotten
 
 ## Resources
 https://github.com/hmerk/semanticHomeMenu/blob/main/main/semanticHomeMenu.yaml
+
+
+
+## Source for the PAGE:
+
+uid: semantic_home_menu
+version: 1.0
+component: 'oh-layout-page'
+config:
+  hideNavbar: true
+  hideSidebarIcon: true
+  label: SemanticHomeMenu
+  showFullscreenIcon: false
+  sidebar: true
+  style:
+    --f7-block-margin-vertical: 0px
+    --f7-block-padding-horizontal: 0px
+    --f7-block-padding-vertical: 0px
+    --f7-navbar-height: 0
+    height: 100dvh
+    margin: 0
+    overflow: hidden
+    padding: 0
+    width: 100%
+blocks:
+- component: oh-block
+  config:
+    class:
+      - no-margin
+      - no-padding
+    style:
+      height: 100%
+      margin: 0
+      overflow: hidden
+      padding: 0
+      width: 100%
+    stylesheet: |
+      .block {
+        margin: 0 !important;
+        padding: 0 !important;
+      }
+      .block:first-child {
+        margin: 0 !important;
+        padding: 0 !important;
+      }
+  slots:
+    default:
+    - component: oh-grid-row
+      config: {}
+      slots:
+        default:
+        - component: oh-grid-col
+          config: {}
+          slots:
+            default:
+            - component: widget:semanticHomeMenu
+              config: {}
+masonry: null
+grid: []
+canvas: null

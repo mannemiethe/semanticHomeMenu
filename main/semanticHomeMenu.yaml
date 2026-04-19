@@ -127,6 +127,7 @@ config:
     .mainWidget .topNavbar .swiper-slide,
     .mainWidget .topNavbar .swiper-slide-active {
         display: flex;
+        align-items: center;
         }
 slots:
  default:
@@ -302,7 +303,10 @@ slots:
                                                 config:
                                                   expandable: true
                                                   style:
+                                                    align-items: center
                                                     border-radius: 5px
+                                                    display: flex
+                                                    justify-content: center
                                                 slots:
                                                   default:
                                                     - component: oh-button
@@ -438,7 +442,10 @@ slots:
                                         - component: f7-swiper-slide
                                           config:
                                             style:
+                                              align-items: center
                                               border-radius: 5px
+                                              display: flex
+                                              justify-content: center
                                           slots:
                                             default:
                                               - component: oh-button
@@ -575,7 +582,10 @@ slots:
                                         - component: f7-swiper-slide
                                           config:
                                             style:
+                                              align-items: center
                                               border-radius: 5px
+                                              display: flex
+                                              justify-content: center
                                           slots:
                                             default:
                                               - component: oh-button

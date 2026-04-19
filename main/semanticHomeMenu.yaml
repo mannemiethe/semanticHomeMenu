@@ -124,6 +124,10 @@ config:
         padding-left: 20px;
         justify-content: left;
         }
+    .mainWidget .topNavbar .swiper-slide,
+    .mainWidget .topNavbar .swiper-slide-active {
+        display: flex;
+        }
 slots:
  default:
  - component: oh-context
